@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML diff for <%= @page.base_path %></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <h1>HTML diff for <%= @page.base_path %></h1>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class='example left'>HTML on <%= @page.env_left %> (<a href='<%= @page.left_url %>' target='blank'>visit page</a>)</h2>
+          Switch to: <% %w[production staging preview].each do |e| %>
+            <a href='?left=<%= e %>&right=<%= @page.env_right %>'><%= e %></a>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <h2 class='example right'>HTML on <%= @page.env_right %> (<a href='<%= @page.right_url %>' target='blank'>visit page</a>)</h2>
+          Switch to: <% %w[production staging preview].each do |e| %>
+            <a href='?left=<%= @page.env_left %>&right=<%= e %>'><%= e %></a>
+          <% end %>
+      </div>
+      </div>
+
+      <hr/>
+
+      <%= @page.diff_html %>
+    </div>
+  </body>
+</html>
